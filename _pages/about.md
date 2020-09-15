@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "academicpages is a ready-to-fork GitHub Pages template for academic personal websites"
+title: "This project aims to build an image recognition algorithm to increase the efficiency of the work order reviews in water Industries"
 excerpt: "About me"
 author_profile: true
 redirect_from: 
