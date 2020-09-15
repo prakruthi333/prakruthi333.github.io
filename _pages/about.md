@@ -10,8 +10,6 @@ redirect_from:
 
  Water and sewer mains pipes are distributed around Victoria . Every Year water industries receives a more than 5 lakhs fault repairs, majority being replacing burst main. Work order is approved by Water industries which includes reviewing the images. A minimum of 20 photos are attached for each repair, and atleast 10,00,000 images are received every year. Approximately 30% of these images are reviewed manually for quality and work completion making it a tedious job. The main objective of the project is to decrease the time spent on approving the work order by use of automation.
 
-  --------
-
 
 A data-driven personal website
 ======
