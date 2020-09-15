@@ -13,37 +13,52 @@ redirect_from:
 
 Built Algorithm from scratch 
 ======
-The dataset consisted of 500 images. When an image is input into a computer they read it as three matrices of pixel values. One each for the red, green and blue colour index. The python package keras was used to import our images, and reshape them to the same size and the pixel values were normalized between 0 and 1
+The dataset consisted of 500 images. When an image is input into a computer they read it as three matrices of pixel values. One each for the red, green and blue colour index. The python package keras was used to import our images, and reshape them to the same size and the pixel values were normalized between 0 and 1. Using keras the dataset was split into training and test/validation data based on a percentage. I used an 80/20 split for training and validation data.
 
-Getting started
+Once processed I used Convolutional Neural Networks(CNNs) to build image recognition algorithms. CNNs are a type of deep learning that contain convolutional layers used to pick up patterns in your data, that otherwise might not be seen. Convolutional neural networks are composed of convolutional layer, a pooled layer and a fully connected layer. Two main pooling methods were used, mean pooling and max pooling. The fully connected layer integrates is the result after the image is passed through multiple convolutional layers and pooling layers to obtain the high-layer semantic feature for image classification.
+
+
+Models
 ======
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Fork [this repository](https://github.com/academicpages/academicpages.github.io) by clicking the "fork" button in the top right. 
-1. Go to the repository's settings (rightmost item in the tabs that start with "Code", should be below "Unwatch"). Rename the repository "[your GitHub username].github.io", which will also be your website's URL.
-1. Set site-wide configuration and create content & metadata (see below -- also see [this set of diffs](http://archive.is/3TPas) showing what files were changed to set up [an example site](https://getorg-testacct.github.io) for a user with the username "getorg-testacct")
-1. Upload any files (like PDFs, .zip files, etc.) to the files/ directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.  
-1. Check status by going to the repository settings, in the "GitHub pages" section
 
-Site-wide configuration
+Different combinations of convolutional and non convolutional layers using layouts were attmepted, but found the best results using the architecture of the LittleVGG (or VGG7) network. This network consists of 7 blocks of convolutions, each ending with a dropout layer for regularization to help prevent overfitting. When training the model several other tools were used to prevent overfitting to the training data. After each step (called epoch) the algorithm would use the validation data set to test the algorithm.
+#insert Image
+
+
+code: file:///Users/prakruthinatraj/Documents/GitHub/prakruthi333.github.io/LittleVgg1.html
+
+During the project, building a plethora of models were attempted using transfer learning. Three of the most popular were MobileNet, ResNet and VGG16. For each of these structured models were trained on the imagenet data set. All of the models plateaued over a much shorter amount of epochs. 
+
+
+MobileNet was the most impressive, hitting its highest validation loss score at only the 3rd epoch. These models had a tendency to quickly start overfitting to the training data. The most difficulty with ResNet, as it would quickly begin scoring in the 90+% accuracy on the training data, but maintaining a low accuracy on the validation data. As ResNet As ResNet had the most layers, it made sense that it would overfit with a small amount of images to train on.
+
+
+code:
+
+
+
+Visualising Models
 ------
-The main configuration file for the site is in the base directory in [_config.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_config.yml), which defines the content in the sidebars and other site-wide features. You will need to replace the default variables with ones about yourself and your site's github repository. The configuration file for the top menu is in [_data/navigation.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_data/navigation.yml). For example, if you don't have a portfolio or blog posts, you can remove those items from that navigation.yml file to remove them from the header. 
+Once the models were trained it was important to inspect these classifiers, and attempt to verify their validity. One way this was achived was visualizing what the models were making their decisions on. This was done by creating heat maps that highlighted important pixel clusters. A function was created that found (@TODO: equation dy/dx pixels) based on the last convolutional layer. The higher this value, the more these pixels had an effect on the final result. In this way, was able to take individual images and look at what pixel clusters made them classify the image the way they did. This tool was used to double check.  However, if the object that is the subject of the classification is playing the primary role on the classification it strengthens our confidence in the algorithms results.
 
-Create content & metadata
+
+code:
+
+
 ------
-For site content, there is one markdown file for each type of content, which are stored in directories like _publications, _talks, _posts, _teaching, or _pages. For example, each talk is a markdown file in the [_talks directory](https://github.com/academicpages/academicpages.github.io/tree/master/_talks). At the top of each markdown file is structured data in YAML about the talk, which the theme will parse to do lots of cool stuff. The same structured data about a talk is used to generate the list of talks on the [Talks page](https://academicpages.github.io/talks), each [individual page](https://academicpages.github.io/talks/2012-03-01-talk-1) for specific talks, the talks section for the [CV page](https://academicpages.github.io/cv), and the [map of places you've given a talk](https://academicpages.github.io/talkmap.html) (if you run this [python file](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.py) or [Jupyter notebook](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.ipynb), which creates the HTML for the map based on the contents of the _talks directory).
 
-**Markdown generator**
-
-I have also created [a set of Jupyter notebooks](https://github.com/academicpages/academicpages.github.io/tree/master/markdown_generator
-) that converts a CSV containing structured data about talks or presentations into individual markdown files that will be properly formatted for the academicpages template. The sample CSVs in that directory are the ones I used to create my own personal website at stuartgeiger.com. My usual workflow is that I keep a spreadsheet of my publications and talks, then run the code in these notebooks to generate the markdown files, then commit and push them to the GitHub repository.
-
-How to edit your site's GitHub repository
+Results
 ------
-Many people use a git client to create files on their local computer and then push them to GitHub's servers. If you are not familiar with git, you can directly edit these configuration and markdown files directly in the github.com interface. Navigate to a file (like [this one](https://github.com/academicpages/academicpages.github.io/blob/master/_talks/2012-03-01-talk-1.md) and click the pencil icon in the top right of the content preview (to the right of the "Raw | Blame | History" buttons). You can delete a file by clicking the trashcan icon to the right of the pencil icon. You can also create new files or upload files by navigating to a directory and clicking the "Create new file" or "Upload files" buttons. 
+After building the models, it was checked on our test data set. This is a set of images that the algorithms had not seen, to check their performance. Similar to the results from our validation data, the models built using transfer learning performed better than our models from scratch. Looking at our VGG16 model, our MobileNet model, and our LittleVGG model trained only on our data shows us that the VGG16 model outperformed the others when comparing overall accuracy.
 
-Example: editing a markdown file for a talk
-![Editing a markdown file for a talk](/images/editing-talk.png)
+Although VGG16 scored a higher accuracy, it’s important to look past this score and take in all of the information in this project. it was observed that the VGG16 algorithm has the highest f1 score for classifying burst pipes, as well as high precision and recall scores.  
 
-For more info
-------
-More info about configuring academicpages can be found in [the guide](https://academicpages.github.io/markdown/). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful.
+ The MobileNet does not have a high recall score for classifying these, but as an extremely high precision. For each of the algorithms, the recall score for classifying burst pipes was higher.
+
+Our algorithm built without the use of transfer learning scored the lowest accuracy, and recall scores lower than the other two algorithms. 
+
+It can aslo be observed that the accuracies follow a general trend in that VGG16 is better than MobileNet which is better than LittleVGG. We note that in both the MobileNet and VGG16 we see a dip from training and validation to test data. This is less than 3% for the VGG16 model, but MobileNet’s accuracy dips over 7% from validation to test data. As we used early stopping based on our validation data, this is important to note as it may imply overfitting to our validation data.
+
+
+
+
