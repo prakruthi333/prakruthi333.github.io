@@ -25,7 +25,6 @@ Different combinations of convolutional and non convolutional layers using layou
 #insert Image
 
 
-code: file:///Users/prakruthinatraj/Documents/GitHub/prakruthi333.github.io/LittleVgg1.html
 
 During the project, building a plethora of models were attempted using transfer learning. Three of the most popular were MobileNet, ResNet and VGG16. For each of these structured models were trained on the imagenet data set. All of the models plateaued over a much shorter amount of epochs. 
 
@@ -33,7 +32,7 @@ During the project, building a plethora of models were attempted using transfer 
 MobileNet was the most impressive, hitting its highest validation loss score at only the 3rd epoch. These models had a tendency to quickly start overfitting to the training data. The most difficulty with ResNet, as it would quickly begin scoring in the 90+% accuracy on the training data, but maintaining a low accuracy on the validation data. As ResNet As ResNet had the most layers, it made sense that it would overfit with a small amount of images to train on.
 
 
-code:
+
 
 
 
@@ -42,7 +41,7 @@ Visualising Models
 Once the models were trained it was important to inspect these classifiers, and attempt to verify their validity. One way this was achived was visualizing what the models were making their decisions on. This was done by creating heat maps that highlighted important pixel clusters. A function was created that found (@TODO: equation dy/dx pixels) based on the last convolutional layer. The higher this value, the more these pixels had an effect on the final result. In this way, was able to take individual images and look at what pixel clusters made them classify the image the way they did. This tool was used to double check.  However, if the object that is the subject of the classification is playing the primary role on the classification it strengthens our confidence in the algorithms results.
 
 
-code:
+
 
 
 ------
