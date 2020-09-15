@@ -59,6 +59,7 @@ Our algorithm built without the use of transfer learning scored the lowest accur
 
 It can aslo be observed that the accuracies follow a general trend in that VGG16 is better than MobileNet which is better than LittleVGG. We note that in both the MobileNet and VGG16 we see a dip from training and validation to test data. This is less than 3% for the VGG16 model, but MobileNet’s accuracy dips over 7% from validation to test data. As we used early stopping based on our validation data, this is important to note as it may imply overfitting to our validation data.
 
+------
 
 
 
